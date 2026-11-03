@@ -7,3 +7,9 @@ src/*.c
 src/undo_actions/*.c
 src/undo_actions/*.swp
 *.DS_Store
+dist/
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/*.substvars
+debian/io.github.phase1geo.annotator/

@@ -1,0 +1,6 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+
+# The project has no meson test suite.
+override_dh_auto_test:

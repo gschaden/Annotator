@@ -1,0 +1,24 @@
+# Builds the Annotator .deb in a clean Ubuntu container.
+#   docker build -f Dockerfile.deb -t annotator-deb .
+#   docker run --rm -v "$PWD/dist:/out" annotator-deb
+ARG UBUNTU=26.10
+FROM ubuntu:${UBUNTU}
+
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends build-essential devscripts equivs \
+ && rm -rf /var/lib/apt/lists/*
+
+# Install build deps from debian/control first so this layer is cached
+# until control changes.
+WORKDIR /src
+COPY debian/control debian/control
+RUN apt-get update \
+ && mk-build-deps --install --remove --tool 'apt-get -y --no-install-recommends' debian/control \
+ && rm -rf /var/lib/apt/lists/* *.buildinfo *.changes
+
+COPY . /src
+RUN dpkg-buildpackage -us -uc -b \
+ && mkdir -p /dist && mv ../*.deb /dist/
+
+CMD ["sh", "-c", "cp -v /dist/*.deb /out/"]

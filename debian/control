@@ -1,0 +1,30 @@
+Source: io.github.phase1geo.annotator
+Section: graphics
+Priority: optional
+Maintainer: Gerhard Schaden <gerhard.schaden@alturos.com>
+Build-Depends: debhelper-compat (= 13),
+               meson,
+               ninja-build,
+               valac,
+               gettext,
+               desktop-file-utils,
+               shared-mime-info,
+               libglib2.0-dev,
+               libgee-0.8-dev,
+               libgranite-7-dev,
+               libgtk-4-dev,
+               libxml2-dev,
+               libpango1.0-dev,
+               libarchive-dev,
+               libwebp-dev
+Standards-Version: 4.7.0
+Homepage: https://github.com/phase1geo/Annotator
+Rules-Requires-Root: no
+
+Package: io.github.phase1geo.annotator
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Image annotation tool
+ Annotate images with shapes, stickers, text, drawings, callouts,
+ magnifiers and blur. Supports crop, resize, borders, unlimited
+ undo/redo and export to JPEG, PNG, TIFF, BMP, PDF, SVG and WebP.
